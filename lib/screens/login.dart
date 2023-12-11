@@ -48,7 +48,10 @@ class _LogInScreenState extends State<LogInScreen> {
             userData = await ApiService().fetchUserDetails(userToken);
             NavigatorWidget().screenPushReplacement(
               context,
-              HomeScreen(userDetails: userData),
+              HomeScreen(
+                userDetails: userData,
+                token: userToken,
+              ),
             );
           } else {
             ScaffoldMessenger.of(context).clearSnackBars();

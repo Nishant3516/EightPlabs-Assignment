@@ -61,6 +61,7 @@ class AuthController {
     } catch (e) {
       // print(e);
     }
+    return null;
   }
 
   Future<void> fetchAndStoreUserDetails(String token) async {
@@ -88,6 +89,7 @@ class AuthController {
     } catch (e) {
       // print("Error occured: $e");
     }
+    return null;
   }
 
   Future<void> storeUserDetails(userDetails) async {

@@ -61,15 +61,20 @@ class _ProfileScreenState extends State<ProfileScreen>
                   const Spacer(flex: 2),
                 ],
               ),
-              const YSpace(height: 10),
-              const PhotoCirlce(),
+              const YSpace(height: 30),
+              PhotoCirlce(
+                firstSubstring: (widget.userData['login'] ?? 'Username')
+                    .toString()
+                    .substring(0, 1)
+                    .toUpperCase(),
+              ),
               const YSpace(height: 10),
               Text(
                 widget.userData['login'] ?? 'Username',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
-              const YSpace(height: 30),
+              const YSpace(height: 50),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text("Personal Details",

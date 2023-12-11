@@ -1,10 +1,14 @@
-import 'package:eightplabs/controllers/controllers.dart';
+import 'package:eightplabs/controllers/auth_controller.dart';
 import 'package:eightplabs/services/services.dart';
 import 'package:eightplabs/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ClassesScreen extends StatefulWidget {
-  const ClassesScreen({super.key});
+  final String? token;
+  const ClassesScreen({
+    super.key,
+    required this.token,
+  });
 
   @override
   State createState() => _ClassesScreenState();
@@ -20,10 +24,18 @@ class _ClassesScreenState extends State<ClassesScreen>
   }
 
   Future<List<Map<String, dynamic>>> loadClasses() async {
-    final String? token = await AuthController().getToken();
-    if (token != null) {
+    final String? storedToken = await AuthController().getToken();
+
+    if (storedToken != null) {
       try {
-        return await ApiService.fetchClasses(token);
+        return await ApiService.fetchClasses(storedToken);
+      } catch (e) {
+        // print(e);
+        return [];
+      }
+    } else if (widget.token != null) {
+      try {
+        return await ApiService.fetchClasses(widget.token!);
       } catch (e) {
         // print(e);
         return [];
